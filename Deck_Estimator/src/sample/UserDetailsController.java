@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class Controller {
+import java.io.File;
+
+public class UserDetailsController {
     @FXML
     TextField userNameLabel;
     @FXML
@@ -44,7 +46,10 @@ public class Controller {
     @FXML
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
-            System.out.println("hey there delilah");
+            System.out.println("Continue Clicked");
+         //   File tempFile = new File("userDetails.txt");
+
+
         }
     }
 
