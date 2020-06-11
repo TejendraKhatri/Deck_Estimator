@@ -61,11 +61,11 @@ public class UserDetailsController {
                 Parent root;
                 stage = (Stage) btnContinue.getScene().getWindow();
                 FXMLLoader myLoader =
-                        new FXMLLoader(getClass().getResource( "CustomerDetails.fxml" ));
+                        new FXMLLoader(getClass().getResource( "MenuOptions.fxml" ));
                 root = myLoader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Customer Details");
+                stage.setTitle("Menu Options");
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
