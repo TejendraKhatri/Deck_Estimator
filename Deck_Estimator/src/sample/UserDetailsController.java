@@ -1,5 +1,6 @@
 package sample;
 
+import com.pack.functions.UsefulFunctions;
 import com.pack.objects.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

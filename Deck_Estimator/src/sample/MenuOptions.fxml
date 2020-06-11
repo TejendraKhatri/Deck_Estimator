@@ -16,12 +16,12 @@
    <left>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="150.0" prefWidth="300.0" text="Update Quote">
+            <Button fx:id="updateQuoteBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Update Quote">
                <font>
                   <Font size="23.0" />
                </font>
             </Button>
-            <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="150.0" prefWidth="300.0" text="Delete Quote">
+            <Button fx:id="deleteQuoteBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Delete Quote">
                <font>
                   <Font size="23.0" />
                </font>
@@ -32,12 +32,12 @@
    <right>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="150.0" prefWidth="300.0" text="Open Quote">
+            <Button fx:id="openQuoteBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Open Quote">
                <font>
                   <Font size="23.0" />
                </font>
             </Button>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="150.0" prefWidth="300.0" text="Change Materials Price">
+            <Button fx:id="changePriceBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#priceChangeBtnAction" prefHeight="150.0" prefWidth="300.0" text="Change Materials Price">
                <font>
                   <Font size="23.0" />
                </font>

@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class MenuOptionsController {
@@ -34,7 +33,6 @@ public class MenuOptionsController {
     private void newQuoteBtnAction(ActionEvent event){
         if(event.getSource() == newQuoteBtn){
             try {
-
                 Stage stage;
                 Parent root;
                 stage = (Stage) newQuoteBtn.getScene().getWindow();
@@ -56,14 +54,17 @@ public class MenuOptionsController {
 
     }
 
+    @FXML
     private void openQuoteBtnAction(ActionEvent event){
 
     }
 
+    @FXML
     private void deleteQuoteBtnAction(ActionEvent event){
 
     }
 
+    @FXML
     private void priceChangeBtnAction(ActionEvent event){
 
     }
