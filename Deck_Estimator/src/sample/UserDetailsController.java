@@ -1,13 +1,18 @@
 package sample;
 
+import com.pack.objects.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.IOException;
 
 public class UserDetailsController {
     @FXML
@@ -46,8 +51,23 @@ public class UserDetailsController {
     @FXML
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
-            System.out.println("Continue Clicked");
-         //   File tempFile = new File("userDetails.txt");
+            User newuser = new User(userNameLabel.getText(), userPhoneLabel.getText());
+            System.out.println(newuser.getName());
+            try {
+                Stage stage;
+                Parent root;
+                stage = (Stage) btnContinue.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource( "CustomerDetails.fxml" ));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Customer Details");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
 
         }

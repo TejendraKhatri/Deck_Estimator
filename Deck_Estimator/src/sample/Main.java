@@ -14,15 +14,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         String startPage = "UserDetails.fxml";
         Parent root;
-        File myObj  = new File("userDetails.txt");
-        if (myObj.createNewFile()) {
-            System.out.println("File created: " + myObj.getName());
-        } else {
-            System.out.println("File already exists.");
-            startPage = "CustomerDetails.fxml";
-        }
+//        File myObj  = new File("userDetails.txt");
+//        if (myObj.createNewFile()) {
+//            System.out.println("File created: " + myObj.getName());
+//        } else {
+//            System.out.println("File already exists.");
+//            startPage = "CustomerDetails.fxml";
+//        }
         root = FXMLLoader.load(getClass().getResource(startPage));
-        primaryStage.setTitle("Deck Estimator");
+        primaryStage.setTitle("User Details");
         primaryStage.setScene(new Scene(root, 500, 230));
         primaryStage.show();
     }
