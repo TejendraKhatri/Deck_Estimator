@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="sample.UserDetailsController">
+<GridPane alignment="center" hgap="10" style="-fx-background-color: D3D3D3;" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserDetailsController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -32,12 +31,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="userNameLabel" layoutX="203.0" layoutY="62.0" promptText="Enter name">
+            <TextField fx:id="userName" layoutX="203.0" layoutY="62.0" promptText="Enter name">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="userPhoneLabel" layoutX="203.0" layoutY="111.0" promptText="Only digits allowed">
+            <TextField fx:id="userPhone" layoutX="203.0" layoutY="111.0" promptText="Only digits allowed">
                <font>
                   <Font size="16.0" />
                </font>

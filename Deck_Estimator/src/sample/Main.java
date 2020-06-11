@@ -25,12 +25,28 @@ public class Main extends Application {
         }
         root = FXMLLoader.load(getClass().getResource(startPage));
         primaryStage.setTitle(stageTitle);
-        primaryStage.setScene(new Scene(root, 500, 230));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch(args);
+
+        //To delete the file for now
+        //Delete this later
+        ////////////////////////////////
+        File myObj2 = new File("customerDetails.txt");
+        File myObj1 = new File("userDetails.txt");
+        if (myObj2.delete()) {
+            System.out.println("Deleted the file: " + myObj2.getName());
+        }
+        if (myObj1.delete()) {
+            System.out.println("Deleted the file: " + myObj1.getName());
+        }
+        else {
+            System.out.println("Failed to delete the file.");
+        }
+        ///////////////////////////////
     }
 }

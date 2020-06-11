@@ -12,35 +12,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class UserDetailsController {
     @FXML
-    TextField userNameLabel;
+    TextField userName;
     @FXML
-    TextField userPhoneLabel;
+    TextField userPhone;
     @FXML
     Button btnContinue;
 
     public void initialize(){
         btnContinue.setDisable(true);
-        userNameLabel.requestFocus();
-        userNameLabel.textProperty().addListener(new ChangeListener<String>() {
+        userName.requestFocus();
+        userName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!(userPhoneLabel.getText().equals("") || userNameLabel.getText().equals("")) ){
+                if (!(userPhone.getText().equals("") || userName.getText().equals("")) ){
                     btnContinue.setDisable(false);
                 }
                 else btnContinue.setDisable(true);
             }
         });
-        userPhoneLabel.textProperty().addListener(new ChangeListener<String>() {
+        userPhone.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.matches("\\d{0,10}?")) {
-                    userPhoneLabel.setText(oldValue);
+                    userPhone.setText(oldValue);
                 }
-                if (!(userPhoneLabel.getText().equals("") || userNameLabel.getText().equals(""))){
+                if (!(userPhone.getText().equals("") || userName.getText().equals(""))){
                     btnContinue.setDisable(false);
                 }
                 else btnContinue.setDisable(true);
@@ -51,9 +52,11 @@ public class UserDetailsController {
     @FXML
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
-            User newuser = new User(userNameLabel.getText(), userPhoneLabel.getText());
-            System.out.println(newuser.getName());
+            User newuser = new User(userName.getText(), userPhone.getText());
             try {
+                FileWriter myWriter = new FileWriter("userDetails.txt");
+                myWriter.write(newuser.getName() + "\n" + newuser.getPhoneNum());
+                myWriter.close();
                 Stage stage;
                 Parent root;
                 stage = (Stage) btnContinue.getScene().getWindow();
