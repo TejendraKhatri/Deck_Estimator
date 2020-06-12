@@ -35,7 +35,7 @@ public class Main extends Application {
 
         //To delete the file for now
         //Delete this later
-        ////////////////////////////////
+        //////////////////////////////////
         File myObj2 = new File("customerDetails.txt");
         File myObj1 = new File("userDetails.txt");
         if (myObj2.delete()) {
