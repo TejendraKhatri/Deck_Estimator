@@ -47,6 +47,6 @@ public class Main extends Application {
         else {
             System.out.println("Failed to delete the file.");
         }
-        ///////////////////////////////
+        /////////////////////////////////
     }
 }
