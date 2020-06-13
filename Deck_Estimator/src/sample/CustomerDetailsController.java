@@ -68,7 +68,6 @@ public class CustomerDetailsController {
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
             Customer newCust = new Customer(customerName.getText(), customerPhone.getText(),customerAddress.getText());
-            UsefulFunctions.changeWindow("vsd","Vsdv");
             try {
                 FileWriter myWriter = new FileWriter("customerDetails.txt");
                 myWriter.write(newCust.getName() + "\n" + newCust.getPhoneNum() + "\n" + newCust.getAddress());

@@ -1,11 +1,19 @@
 package sample;
 
+import com.pack.objects.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DeckDetailsController {
     @FXML
@@ -93,7 +101,26 @@ public class DeckDetailsController {
     @FXML
     private void btnHandleAction(ActionEvent event){
         if(event.getSource() == nextBtn){
-
+            System.out.println(lengthFt.getValue() + " "+ lengthInch.getValue() + " "+breadthFt.getValue() + " "+ breadthInch.getValue());
+            try {
+                FileWriter myWriter = new FileWriter("deckDetails.txt");
+                myWriter.write(lengthFt.getValue() + "\n" + lengthInch.getValue() + "\n"
+                                + breadthFt.getValue() + "\n" + breadthInch.getValue() + "\n"
+                                + heightFt.getValue());
+                myWriter.close();
+                Stage stage;
+                Parent root;
+                stage = (Stage) nextBtn.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource( "ResultPage.fxml" ));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Deck Calculator");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
