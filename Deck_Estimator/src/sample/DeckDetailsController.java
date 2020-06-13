@@ -1,6 +1,6 @@
 package sample;
 
-import com.pack.objects.Customer;
+import com.pack.objects.Deck;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class DeckDetailsController {
@@ -28,6 +27,8 @@ public class DeckDetailsController {
     ComboBox<Integer> heightFt;
     @FXML
     Button nextBtn;
+
+    public static Deck newDeck;
 
     public void initialize(){
         nextBtn.setDisable(true);
@@ -102,12 +103,8 @@ public class DeckDetailsController {
     private void btnHandleAction(ActionEvent event){
         if(event.getSource() == nextBtn){
             System.out.println(lengthFt.getValue() + " "+ lengthInch.getValue() + " "+breadthFt.getValue() + " "+ breadthInch.getValue());
+            newDeck = new Deck(lengthFt.getValue(),lengthInch.getValue(),breadthFt.getValue(),breadthInch.getValue(),heightFt.getValue());
             try {
-                FileWriter myWriter = new FileWriter("deckDetails.txt");
-                myWriter.write(lengthFt.getValue() + "\n" + lengthInch.getValue() + "\n"
-                                + breadthFt.getValue() + "\n" + breadthInch.getValue() + "\n"
-                                + heightFt.getValue());
-                myWriter.close();
                 Stage stage;
                 Parent root;
                 stage = (Stage) nextBtn.getScene().getWindow();

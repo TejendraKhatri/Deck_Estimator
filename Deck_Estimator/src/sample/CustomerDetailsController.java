@@ -1,6 +1,5 @@
 package sample;
 
-import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class CustomerDetailsController {
@@ -25,6 +23,8 @@ public class CustomerDetailsController {
     Button btnContinue;
     @FXML
     TextField customerAddress;
+
+    public static Customer newCustomer;
 
     public void initialize(){
         btnContinue.setDisable(true);
@@ -67,11 +67,8 @@ public class CustomerDetailsController {
     @FXML
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
-            Customer newCust = new Customer(customerName.getText(), customerPhone.getText(),customerAddress.getText());
+            newCustomer = new Customer(customerName.getText(), customerPhone.getText(),customerAddress.getText());
             try {
-                FileWriter myWriter = new FileWriter("customerDetails.txt");
-                myWriter.write(newCust.getName() + "\n" + newCust.getPhoneNum() + "\n" + newCust.getAddress());
-                myWriter.close();
                 Stage stage;
                 Parent root;
                 stage = (Stage) btnContinue.getScene().getWindow();
