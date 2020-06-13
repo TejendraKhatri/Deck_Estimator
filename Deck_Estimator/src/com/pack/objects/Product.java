@@ -1,5 +1,7 @@
 package com.pack.objects;
 
+import javafx.beans.property.StringProperty;
+
 public class Product {
     String name;
     int id;
