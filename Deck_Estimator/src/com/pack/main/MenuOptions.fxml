@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.main.MenuOptionsController">
+   <top>
+      <Button fx:id="newQuoteBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newQuoteBtnAction" prefHeight="125.0" prefWidth="600.0" style="-fx-background-color: #66ffd9;" text="New Quote" textAlignment="CENTER" textFill="#2e09d6" underline="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Button>
+   </top>
+   <left>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="updateQuoteBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Update Quote">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteQuoteBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Delete Quote">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="openQuoteBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openQuoteBtnAction" prefHeight="150.0" prefWidth="300.0" text="Open Quote">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="changePriceBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#priceChangeBtnAction" prefHeight="150.0" prefWidth="300.0" text="Change Materials Price">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
