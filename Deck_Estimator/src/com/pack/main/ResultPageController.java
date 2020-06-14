@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,14 +50,6 @@ public class ResultPageController {
         ConnectionClass connectionClass = new ConnectionClass();
         connection = connectionClass.getConnection();
 
-        custName.setText(newCustomer.getName());
-        custPhoneNum.setText(newCustomer.getPhoneNum());
-        custAddress.setText(newCustomer.getAddress());
-
-        //FORMAT TO TWO DECIMAL PLACES
-        DecimalFormat df = new DecimalFormat("#.##");
-        deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft." );
-
         populateObservableList(newDeck.getLength(),newDeck.getBreadth(), newDeck.getHeight());
 
         populateTableView();
@@ -67,6 +60,14 @@ public class ResultPageController {
 
 
     private void populateOtherDetails() {
+        custName.setText(newCustomer.getName());
+        custPhoneNum.setText(newCustomer.getPhoneNum());
+        custAddress.setText(newCustomer.getAddress());
+
+        //FORMAT TO TWO DECIMAL PLACES
+        DecimalFormat df = new DecimalFormat("#.##");
+        deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft." );
+
     }
 
     private void populateTableView(){
@@ -76,6 +77,16 @@ public class ResultPageController {
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colSubtotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
+        colSubtotal.setCellFactory(tc->new TableCell<Product,Double>(){
+            protected void updateItem(Double subTotal,boolean empty){
+                super.updateItem(subTotal, empty);
+                if(empty) {
+                    setText(null);
+                } else {
+                    setText(String.format(" $%.2f", subTotal.floatValue()));
+                }
+            }
+        });
         matTable.setItems(obsMaterialsList);
     }
 

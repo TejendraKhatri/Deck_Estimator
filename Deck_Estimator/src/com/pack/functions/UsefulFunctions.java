@@ -21,7 +21,7 @@ public class UsefulFunctions{
         return  materialList;
     }
 
-    private static void addToList(int id , int qty){
+    private static void addToMaterialOrderList(int id , int qty){
         try{
             st = ResultPageController.connection.prepareStatement("SELECT * FROM material WHERE Product_ID = ?");
             st.setInt(1, id);
@@ -40,8 +40,8 @@ public class UsefulFunctions{
         int board_10ft = (int) (Math.ceil(totalArea)/5);
         double remainingArea = totalArea - board_10ft*5;
         int board_8ft = (int) (Math.ceil(remainingArea)/4) + 1;
-        addToList(MaterialCode.DECK_BOARD_10FT,board_10ft);
-        addToList(MaterialCode.DECK_BOARD_8FT,board_8ft);
+        addToMaterialOrderList(MaterialCode.DECK_BOARD_10FT,board_10ft);
+        addToMaterialOrderList(MaterialCode.DECK_BOARD_8FT,board_8ft);
     }
 
     private static void calculateJoistsBearers(double lth,double bdth){
@@ -53,20 +53,29 @@ public class UsefulFunctions{
         }
         int joistNums = (int) (bdth * 12 /16 + 1);
         int bearerNums = (int) (lth / 2 + 1 + 2);
-        addToList(MaterialCode.Wood_2x8x10,joistNums + bearerNums);
+        addToMaterialOrderList(MaterialCode.Wood_2x8x10,joistNums + bearerNums);
     }
 
     private static void calculateFootings(double lth, double bdth,int height){
         int numFootings = (int) (Math.sqrt(lth*bdth) - 1);
         if(height > 8){
-            addToList(MaterialCode.Wood_4x4x10,numFootings);
-            addToList(MaterialCode.Wood_4x4x8,1);
+            addToMaterialOrderList(MaterialCode.Wood_4x4x10,numFootings);
+            addToMaterialOrderList(MaterialCode.Wood_4x4x8,1);
         }
         else{
-            addToList(MaterialCode.Wood_4x4x10,1);
-            addToList(MaterialCode.Wood_4x4x8,numFootings);
+            addToMaterialOrderList(MaterialCode.Wood_4x4x10,1);
+            addToMaterialOrderList(MaterialCode.Wood_4x4x8,numFootings);
         }
     }
+
+    private static void addUserToDatabase(String name, String PhoneNum){
+
+    }
+
+    private static void addCustomer(String name, String phNum, String address){
+
+    }
+
 }
 
 
