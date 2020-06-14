@@ -14,11 +14,23 @@ public class UsefulFunctions{
     static PreparedStatement st;
     static ResultSet resultSet = ResultPageController.rs;
 
-    public static ArrayList populateObservableList(double lth,double bdth , int height){
+    public static void populateObservableList(double lth,double bdth , int height){
         calculateBoardingMaterial(lth,bdth);
         calculateJoistsBearers(lth,bdth);
         calculateFootings(lth,bdth,height);
-        return  materialList;
+        calculateConcrete(lth,bdth);
+        calculateBalusterBeveled(lth,bdth);
+        calculateScrews(lth,bdth);
+    }
+
+    private static void calculateScrews(double lth, double bdth) {
+        int boxCt = (int) (3.5 * lth * bdth / 115);
+        addToMaterialOrderList(MaterialCode.Nails,boxCt);
+    }
+
+    private static void calculateBalusterBeveled(double lth, double bdth) {
+        int qtyBaluster = (int) ((12 * lth + 24 * bdth - 6) / 5.5);
+        addToMaterialOrderList(MaterialCode.BalusterBeveled,qtyBaluster);
     }
 
     private static void addToMaterialOrderList(int id , int qty){
@@ -66,6 +78,11 @@ public class UsefulFunctions{
             addToMaterialOrderList(MaterialCode.Wood_4x4x10,1);
             addToMaterialOrderList(MaterialCode.Wood_4x4x8,numFootings);
         }
+    }
+
+    private static void calculateConcrete(double lth, double bdth){
+        int concQty = (int) (Math.sqrt(lth * bdth / 4));
+        addToMaterialOrderList(MaterialCode.ConcreteMix , concQty);
     }
 
     private static void addUserToDatabase(String name, String PhoneNum){

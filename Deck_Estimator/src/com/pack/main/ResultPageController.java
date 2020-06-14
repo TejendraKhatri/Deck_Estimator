@@ -6,12 +6,10 @@ import com.pack.objects.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -39,6 +37,21 @@ public class ResultPageController {
     TableColumn colUnitPrice;
     @FXML
     TableColumn colSubtotal;
+    @FXML
+    Label totalAmt;
+    @FXML
+    Label subTotal;
+    @FXML
+    Label taxAmt;
+    @FXML
+    Label userName;
+    @FXML
+    Label userPhoneNum;
+    @FXML
+    TextField discount;
+    @FXML
+    TextField surcharge;
+
 
 
     public static Connection connection = null;
@@ -56,8 +69,6 @@ public class ResultPageController {
 
         populateOtherDetails();
     }
-
-
 
     private void populateOtherDetails() {
         custName.setText(newCustomer.getName());
