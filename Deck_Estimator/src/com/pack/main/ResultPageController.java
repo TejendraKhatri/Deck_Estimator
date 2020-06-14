@@ -1,18 +1,23 @@
 package com.pack.main;
 
 import com.pack.connectivity.ConnectionClass;
+import com.pack.functions.Constants;
 import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Product;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;
@@ -38,19 +43,19 @@ public class ResultPageController {
     @FXML
     TableColumn colSubtotal;
     @FXML
-    Label totalAmt;
+    Label totalAmtLabel;
     @FXML
-    Label subTotal;
+    Label subTotalLabel;
     @FXML
-    Label taxAmt;
+    Label taxAmtLabel;
     @FXML
     Label userName;
     @FXML
     Label userPhoneNum;
     @FXML
-    TextField discount;
+    TextField discountField;
     @FXML
-    TextField surcharge;
+    TextField surchargeField;
 
 
 
@@ -63,11 +68,67 @@ public class ResultPageController {
         ConnectionClass connectionClass = new ConnectionClass();
         connection = connectionClass.getConnection();
 
+        discountField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
+                    discountField.setText(oldValue);
+                }
+                if(discountField.getText() == null){
+                    surchargeField.setDisable(false);
+                }
+                surchargeField.setDisable(true);
+                updateTotalBalance();
+            }
+        });
+
+        surchargeField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
+                    surchargeField.setText(oldValue);
+                }
+                if(surchargeField.getText() == null){
+                    discountField.setDisable(false);
+                }
+                updateTotalBalance();
+                discountField.setDisable(true);
+            }
+        });
+
+
         populateObservableList(newDeck.getLength(),newDeck.getBreadth(), newDeck.getHeight());
 
         populateTableView();
 
         populateOtherDetails();
+
+        updateTotalBalance();
+    }
+
+    private void updateTotalBalance(){
+        //calculate subTotal
+        double subtotalAmt = 0;
+        for(Product x: obsMaterialsList){
+            subtotalAmt += x.getSubTotal();
+        }
+        subTotalLabel.setText("$"+subtotalAmt);
+
+        //calculate Tax
+        double taxAmt = subtotalAmt * Constants.TAXRATE / 100;
+        taxAmtLabel.setText("$" + taxAmt);
+
+        double discountAmt = 0;
+        double surchargeAmt = 0;
+        if(discountField.getText() != null){
+            discountAmt = Double.valueOf(discountField.getText());
+        }
+        if(surchargeField.getText() != null){
+            surchargeAmt = Double.valueOf(surchargeField.getText());
+        }
+
+        double totalAmt = subtotalAmt + taxAmt - discountAmt + surchargeAmt;
+        totalAmtLabel.setText("$" + totalAmt);
     }
 
     private void populateOtherDetails() {
@@ -78,7 +139,15 @@ public class ResultPageController {
         //FORMAT TO TWO DECIMAL PLACES
         DecimalFormat df = new DecimalFormat("#.##");
         deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft." );
-
+        try {
+            File file =
+                    new File("userDetails.txt");
+            Scanner sc = new Scanner(file);
+            userName.setText(sc.nextLine());
+            userPhoneNum.setText(sc.nextLine());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void populateTableView(){
