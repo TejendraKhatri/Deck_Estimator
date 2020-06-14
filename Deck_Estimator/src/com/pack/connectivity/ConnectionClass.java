@@ -1,4 +1,4 @@
-package Connectivity;
+package com.pack.connectivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,6 +1,8 @@
 package com.pack.objects;
 
-public class User implements Person{
+import com.pack.interfaces.Person;
+
+public class User implements Person {
     private String name;
     private String phoneNumber;
 
