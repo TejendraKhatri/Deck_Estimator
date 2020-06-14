@@ -62,6 +62,7 @@ public class ResultPageController {
     public static Connection connection = null;
     public static ResultSet rs;
     private static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
+    DecimalFormat df = new DecimalFormat("#.##");
 
     public void initialize(){
         //CREATE DATABASE CONNECTION
@@ -71,11 +72,12 @@ public class ResultPageController {
         discountField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("")){
+                    surchargeField.setDisable(false);
+                }
+                else surchargeField.setDisable(true);
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
                     discountField.setText(oldValue);
-                }
-                if(discountField.getText() == null){
-                    surchargeField.setDisable(false);
                 }
                 surchargeField.setDisable(true);
                 updateTotalBalance();
@@ -85,11 +87,12 @@ public class ResultPageController {
         surchargeField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("")){
+                    discountField.setDisable(false);
+                }
+                else discountField.setDisable(true);
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
                     surchargeField.setText(oldValue);
-                }
-                if(surchargeField.getText() == null){
-                    discountField.setDisable(false);
                 }
                 updateTotalBalance();
                 discountField.setDisable(true);
@@ -112,23 +115,22 @@ public class ResultPageController {
         for(Product x: obsMaterialsList){
             subtotalAmt += x.getSubTotal();
         }
-        subTotalLabel.setText("$"+subtotalAmt);
-
+        subTotalLabel.setText(df.format(subtotalAmt));
         //calculate Tax
         double taxAmt = subtotalAmt * Constants.TAXRATE / 100;
-        taxAmtLabel.setText("$" + taxAmt);
+        taxAmtLabel.setText(df.format(taxAmt));
 
         double discountAmt = 0;
         double surchargeAmt = 0;
-        if(discountField.getText() != null){
+        if(!(discountField.getText().isEmpty())){
             discountAmt = Double.valueOf(discountField.getText());
         }
-        if(surchargeField.getText() != null){
+        if(!(surchargeField.getText().isEmpty())){
             surchargeAmt = Double.valueOf(surchargeField.getText());
         }
 
         double totalAmt = subtotalAmt + taxAmt - discountAmt + surchargeAmt;
-        totalAmtLabel.setText("$" + totalAmt);
+        totalAmtLabel.setText(df.format(totalAmt));
     }
 
     private void populateOtherDetails() {
@@ -137,7 +139,6 @@ public class ResultPageController {
         custAddress.setText(newCustomer.getAddress());
 
         //FORMAT TO TWO DECIMAL PLACES
-        DecimalFormat df = new DecimalFormat("#.##");
         deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft." );
         try {
             File file =

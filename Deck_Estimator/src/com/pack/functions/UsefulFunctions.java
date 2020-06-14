@@ -25,6 +25,9 @@ public class UsefulFunctions{
 
     private static void calculateScrews(double lth, double bdth) {
         int boxCt = (int) (3.5 * lth * bdth / 115);
+        if(boxCt == 0){
+            boxCt++;
+        }
         addToMaterialOrderList(MaterialCode.Nails,boxCt);
     }
 
@@ -34,6 +37,9 @@ public class UsefulFunctions{
     }
 
     private static void addToMaterialOrderList(int id , int qty){
+        if(qty <= 0){
+            return;
+        }
         try{
             st = ResultPageController.connection.prepareStatement("SELECT * FROM material WHERE Product_ID = ?");
             st.setInt(1, id);
@@ -81,7 +87,7 @@ public class UsefulFunctions{
     }
 
     private static void calculateConcrete(double lth, double bdth){
-        int concQty = (int) (Math.sqrt(lth * bdth / 4));
+        int concQty = (int) (Math.sqrt(lth * bdth / 4) + 1) ;
         addToMaterialOrderList(MaterialCode.ConcreteMix , concQty);
     }
 

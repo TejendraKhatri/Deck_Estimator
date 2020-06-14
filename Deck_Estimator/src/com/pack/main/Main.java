@@ -20,7 +20,7 @@ public class Main extends Application {
             System.out.println("File created: " + myObj.getName());
         } else {
             System.out.println("File already exists.");
-            startPage = "CustomerDetails.fxml";
+            startPage = "MenuOptions.fxml";
             stageTitle = "Menu Options";
         }
         root = FXMLLoader.load(getClass().getResource(startPage));
