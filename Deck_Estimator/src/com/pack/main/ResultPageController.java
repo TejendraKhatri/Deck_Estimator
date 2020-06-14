@@ -79,7 +79,6 @@ public class ResultPageController {
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
                     discountField.setText(oldValue);
                 }
-                surchargeField.setDisable(true);
                 updateTotalBalance();
             }
         });
@@ -95,7 +94,6 @@ public class ResultPageController {
                     surchargeField.setText(oldValue);
                 }
                 updateTotalBalance();
-                discountField.setDisable(true);
             }
         });
 
