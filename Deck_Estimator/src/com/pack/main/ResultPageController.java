@@ -8,12 +8,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -56,8 +62,8 @@ public class ResultPageController {
     TextField discountField;
     @FXML
     TextField surchargeField;
-
-
+    @FXML
+    Button backBtn;
 
     public static Connection connection = null;
     public static ResultSet rs;
@@ -105,6 +111,26 @@ public class ResultPageController {
         populateOtherDetails();
 
         updateTotalBalance();
+    }
+
+    @FXML
+    private void handleBtnAction(ActionEvent event){
+        if(event.getSource() == backBtn){
+            try {
+                Stage stage;
+                Parent root;
+                stage = (Stage) backBtn.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Customer Details");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void updateTotalBalance(){
@@ -168,5 +194,7 @@ public class ResultPageController {
         });
         matTable.setItems(obsMaterialsList);
     }
+
+
 
 }

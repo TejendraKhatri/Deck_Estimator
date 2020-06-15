@@ -28,6 +28,7 @@ public class DeckDetailsController {
     @FXML
     Button nextBtn;
 
+
     public static Deck newDeck;
 
     public void initialize(){
@@ -102,7 +103,6 @@ public class DeckDetailsController {
     @FXML
     private void btnHandleAction(ActionEvent event){
         if(event.getSource() == nextBtn){
-            System.out.println(lengthFt.getValue() + " "+ lengthInch.getValue() + " "+breadthFt.getValue() + " "+ breadthInch.getValue());
             newDeck = new Deck(lengthFt.getValue(),lengthInch.getValue(),breadthFt.getValue(),breadthInch.getValue(),heightFt.getValue());
             try {
                 Stage stage;
