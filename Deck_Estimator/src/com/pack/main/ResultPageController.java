@@ -127,6 +127,8 @@ public class ResultPageController {
                 stage.setScene(scene);
                 stage.setTitle("Customer Details");
                 stage.show();
+                UsefulFunctions.materialList.clear();
+                obsMaterialsList.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             }
