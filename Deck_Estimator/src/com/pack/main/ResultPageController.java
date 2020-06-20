@@ -17,13 +17,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.Scanner;
 
 import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;
@@ -65,15 +62,11 @@ public class ResultPageController {
     @FXML
     Button backBtn;
 
-    public static Connection connection = null;
     public static ResultSet rs;
     private static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
     DecimalFormat df = new DecimalFormat("#.##");
 
     public void initialize(){
-        //CREATE DATABASE CONNECTION
-        ConnectionClass connectionClass = new ConnectionClass();
-        connection = connectionClass.getConnection();
 
         discountField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -165,15 +158,14 @@ public class ResultPageController {
         custAddress.setText(newCustomer.getAddress());
 
         //FORMAT TO TWO DECIMAL PLACES
-        deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft." );
+        deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft.");
         try {
-            File file =
-                    new File("userDetails.txt");
-            Scanner sc = new Scanner(file);
-            userName.setText(sc.nextLine());
-            userPhoneNum.setText(sc.nextLine());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            rs = ConnectionClass.connection.createStatement().executeQuery("SELECT * FROM user");
+            rs.next();
+            userName.setText(rs.getString("User_Name"));
+            userPhoneNum.setText(rs.getString("User_PhoneNumber"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 

@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class UserDetailsController {
@@ -56,9 +55,6 @@ public class UserDetailsController {
             User newuser = new User(userName.getText(), userPhone.getText());
             UsefulFunctions.addUserToDatabase(newuser.getName(),newuser.getPhoneNum());
             try {
-                FileWriter myWriter = new FileWriter("userDetails.txt");
-                myWriter.write(newuser.getName() + "\n" + newuser.getPhoneNum());
-                myWriter.close();
                 Stage stage;
                 Parent root;
                 stage = (Stage) btnContinue.getScene().getWindow();

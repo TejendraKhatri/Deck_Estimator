@@ -33,6 +33,7 @@ public class ConnectionClass {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
+                System.out.println("Connection closed");
             }
         } catch (SQLException e) {
             throw e;

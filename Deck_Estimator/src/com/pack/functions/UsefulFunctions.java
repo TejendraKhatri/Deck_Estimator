@@ -1,5 +1,6 @@
 package com.pack.functions;
 
+import com.pack.connectivity.ConnectionClass;
 import com.pack.interfaces.MaterialCode;
 import com.pack.main.ResultPageController;
 import com.pack.objects.Product;
@@ -12,7 +13,19 @@ import java.util.ArrayList;
 public class UsefulFunctions{
     public static ArrayList<Product> materialList = new ArrayList<>();
     static PreparedStatement st;
-    static ResultSet resultSet = ResultPageController.rs;
+    public static ResultSet resultSet = ResultPageController.rs;
+
+    public static boolean userExists(){
+        try{
+            resultSet = ConnectionClass.connection.createStatement().executeQuery("SELECT * FROM user");
+            if(resultSet.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public static void populateObservableList(double lth,double bdth , int height){
         calculateBoardingMaterial(lth,bdth);
@@ -41,7 +54,7 @@ public class UsefulFunctions{
             return;
         }
         try{
-            st = ResultPageController.connection.prepareStatement("SELECT * FROM material WHERE Product_ID = ?");
+            st = ConnectionClass.connection.prepareStatement("SELECT * FROM material WHERE Product_ID = ?");
             st.setInt(1, id);
             resultSet = st.executeQuery();
             while (resultSet.next()) {
@@ -92,30 +105,31 @@ public class UsefulFunctions{
     }
 
     public static void addUserToDatabase(String name, String phNu){
-//        try{
-//            st = ResultPageController.connection.prepareStatement("INSERT INTO users( " +
-//                    "User_Name, User_PhoneNumber) " +
-//                    "VALUES(?,?)");
-//            st.setString(1,name);
-//            st.setString(2,phNu);
-//            resultSet = st.executeQuery();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            st = ConnectionClass.connection.prepareStatement("INSERT INTO user( " +
+                    "User_Name, User_PhoneNumber) " +
+                    "VALUES(?,?)");
+            st.setString(1,name);
+            st.setString(2,phNu);
+            st.executeUpdate();
+            System.out.println("USER ADDED!!!!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addCustomerToDatabase(String name, String PhoneNum, String address){
-//        try{
-//            st = ResultPageController.connection.prepareStatement("INSERT INTO customers( " +
-//                    "Customer_Name,Customer_Address,Customer_PhoneNumber) " +
-//                    "VALUES(?,?,?)");
-//            st.setString(1,name);
-//            st.setString(3,PhoneNum);
-//            st.setString(2,address);
-//            resultSet = st.executeQuery();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            st = ConnectionClass.connection.prepareStatement("INSERT INTO customers( " +
+                    "Customer_Name,Customer_Address,Customer_PhoneNumber) " +
+                    "VALUES(?,?,?)");
+            st.setString(1,name);
+            st.setString(3,PhoneNum);
+            st.setString(2,address);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
