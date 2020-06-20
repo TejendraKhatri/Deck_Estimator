@@ -25,7 +25,7 @@ public class MenuOptionsController {
     public void initialize(){
         openQuoteBtn.setDisable(true);
         deleteQuoteBtn.setDisable(true);
-        changePriceBtn.setDisable(true);
+        changePriceBtn.setDisable(false);
         updateQuoteBtn.setDisable(true);
     }
 
@@ -66,7 +66,22 @@ public class MenuOptionsController {
 
     @FXML
     private void priceChangeBtnAction(ActionEvent event){
-
+        if(event.getSource() == changePriceBtn){
+            try {
+                Stage stage;
+                Parent root;
+                stage = (Stage) changePriceBtn.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("ChangePrice.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Change Price");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

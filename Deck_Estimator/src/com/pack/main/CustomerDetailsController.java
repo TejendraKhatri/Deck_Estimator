@@ -1,5 +1,6 @@
 package com.pack.main;
 
+import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -68,6 +69,7 @@ public class CustomerDetailsController {
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
             newCustomer = new Customer(customerName.getText(), customerPhone.getText(),customerAddress.getText());
+            UsefulFunctions.addCustomerToDatabase(newCustomer.getName(),newCustomer.getPhoneNum(),newCustomer.getAddress());
             try {
                 Stage stage;
                 Parent root;

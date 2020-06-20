@@ -1,5 +1,6 @@
 package com.pack.main;
 
+import com.pack.functions.UsefulFunctions;
 import com.pack.objects.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,6 +54,7 @@ public class UserDetailsController {
     private void btnClickedAction(ActionEvent event){
         if(event.getSource() == btnContinue){
             User newuser = new User(userName.getText(), userPhone.getText());
+            UsefulFunctions.addUserToDatabase(newuser.getName(),newuser.getPhoneNum());
             try {
                 FileWriter myWriter = new FileWriter("userDetails.txt");
                 myWriter.write(newuser.getName() + "\n" + newuser.getPhoneNum());

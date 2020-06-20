@@ -21,8 +21,7 @@ public class Product {
     public int getQty() { return qty.get();}
     public double getUnitPrice() { return unitPrice.get();}
     public double getSubTotal() { return subTotal.get();}
-
-
+    
 
     @Override
     public String toString() {

@@ -91,14 +91,32 @@ public class UsefulFunctions{
         addToMaterialOrderList(MaterialCode.ConcreteMix , concQty);
     }
 
-    private static void addUserToDatabase(String name, String PhoneNum){
-
+    public static void addUserToDatabase(String name, String phNu){
+//        try{
+//            st = ResultPageController.connection.prepareStatement("INSERT INTO users( " +
+//                    "User_Name, User_PhoneNumber) " +
+//                    "VALUES(?,?)");
+//            st.setString(1,name);
+//            st.setString(2,phNu);
+//            resultSet = st.executeQuery();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    private static void addCustomer(String name, String phNum, String address){
-
+    public static void addCustomerToDatabase(String name, String PhoneNum, String address){
+//        try{
+//            st = ResultPageController.connection.prepareStatement("INSERT INTO customers( " +
+//                    "Customer_Name,Customer_Address,Customer_PhoneNumber) " +
+//                    "VALUES(?,?,?)");
+//            st.setString(1,name);
+//            st.setString(3,PhoneNum);
+//            st.setString(2,address);
+//            resultSet = st.executeQuery();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
-
 }
 
 

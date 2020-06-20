@@ -16,13 +16,13 @@ public class Main extends Application {
         String stageTitle = "User Details";
         Parent root;
         File myObj  = new File("userDetails.txt");
-        if (myObj.createNewFile()) {
-            System.out.println("File created: " + myObj.getName());
-        } else {
-            System.out.println("File already exists.");
-            startPage = "MenuOptions.fxml";
-            stageTitle = "Menu Options";
-        }
+//        if (myObj.createNewFile()) {
+//            System.out.println("File created: " + myObj.getName());
+//        } else {
+//            System.out.println("File already exists.");
+//            startPage = "MenuOptions.fxml";
+//            stageTitle = "Menu Options";
+//        }
         root = FXMLLoader.load(getClass().getResource(startPage));
         primaryStage.setTitle(stageTitle);
         primaryStage.setScene(new Scene(root));

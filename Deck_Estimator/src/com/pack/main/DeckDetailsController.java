@@ -1,6 +1,7 @@
 package com.pack.main;
 
 import com.pack.objects.Deck;
+import com.pack.objects.Stairs;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -9,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,12 +30,18 @@ public class DeckDetailsController {
     ComboBox<Integer> heightFt;
     @FXML
     Button nextBtn;
-
+    @FXML
+    CheckBox stairsChk;
+    @FXML
+    TextField totalRunTextBox;
 
     public static Deck newDeck;
+    public static Stairs newStairs;
 
     public void initialize(){
         nextBtn.setDisable(true);
+        totalRunTextBox.setDisable(true);
+
         for(int i = 1; i <= 100 ; i++){
             lengthFt.getItems().add(i);
             breadthFt.getItems().add(i);
@@ -98,12 +107,42 @@ public class DeckDetailsController {
             }
         });
 
+        stairsChk.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if(stairsChk.isSelected()){
+                    totalRunTextBox.setDisable(false);
+                }
+                else totalRunTextBox.setDisable(true);
+                if(stairsChk.isSelected() && !totalRunTextBox.getText().isEmpty()){
+                    nextBtn.setDisable(false);
+                }
+                else nextBtn.setDisable(true);
+            }
+        });
+
+        totalRunTextBox.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (!t1.matches("\\d{0,10}?")) {
+                    totalRunTextBox.setText(s);
+                }
+                if(totalRunTextBox.getText().isEmpty()){
+                    nextBtn.setDisable(true);
+                }
+                else nextBtn.setDisable(false);
+            }
+        });
+
     }
 
     @FXML
     private void btnHandleAction(ActionEvent event){
         if(event.getSource() == nextBtn){
             newDeck = new Deck(lengthFt.getValue(),lengthInch.getValue(),breadthFt.getValue(),breadthInch.getValue(),heightFt.getValue());
+            if(stairsChk.isSelected() && !(totalRunTextBox.getText().isEmpty())){
+                newStairs = new Stairs(heightFt.getValue(),Float.valueOf(totalRunTextBox.getText()));
+            }
             try {
                 Stage stage;
                 Parent root;

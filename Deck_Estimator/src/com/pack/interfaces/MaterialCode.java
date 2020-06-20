@@ -15,5 +15,4 @@ public interface MaterialCode {
     int BalusterBeveled     = 112;
     int Nails               = 113;
     int Stair_Stringer      = 114;
-
 }
