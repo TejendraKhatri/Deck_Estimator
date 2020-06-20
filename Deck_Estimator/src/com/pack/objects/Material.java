@@ -14,4 +14,47 @@ public class Material {
         this.name = new SimpleStringProperty(name);
         this.unitPrice = new SimpleDoubleProperty(unitPrice);
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", name=" + name +
+                ", unitPrice=" + unitPrice;
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public double getUnitPrice() {
+        return unitPrice.get();
+    }
+
+    public SimpleDoubleProperty unitPriceProperty() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice.set(unitPrice);
+    }
 }

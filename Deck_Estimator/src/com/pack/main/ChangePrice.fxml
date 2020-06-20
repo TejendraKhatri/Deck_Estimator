@@ -13,9 +13,9 @@
    <children>
       <TableView fx:id="matTableView" layoutX="44.0" layoutY="60.0" prefHeight="181.0" prefWidth="531.0">
         <columns>
-          <TableColumn fx:id="nameCol" prefWidth="432.0" text="Name" />
-          <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="99.20001220703125" text="Unit_Price" />
-            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" visible="false" />
+          <TableColumn fx:id="nameCol" prefWidth="235.20001220703125" text="Name" />
+          <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="133.60003662109375" text="Unit_Price" />
+            <TableColumn fx:id="idCol" prefWidth="159.20001220703125" text="ID" />
         </columns>
       </TableView>
       <Label layoutX="225.0" layoutY="1.0" text="Change Price">

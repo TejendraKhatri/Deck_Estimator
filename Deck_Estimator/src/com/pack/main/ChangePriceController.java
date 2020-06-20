@@ -1,7 +1,11 @@
 package com.pack.main;
 
+import com.pack.connectivity.ConnectionClass;
+import com.pack.objects.Material;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +13,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ChangePriceController implements Initializable{
@@ -38,6 +47,11 @@ public class ChangePriceController implements Initializable{
     @FXML
     Label matNameLabel;
 
+    ArrayList<Material> materialList = new ArrayList<>();
+    ObservableList<Material> obList = FXCollections.observableArrayList();
+    ResultSet rs;
+    PreparedStatement st;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updatePane.setVisible(false);
@@ -56,6 +70,10 @@ public class ChangePriceController implements Initializable{
                 else updateBtn.setDisable(false);
             }
         });
+
+//        matTableView.add
+
+        populateTableView();
     }
 
     @FXML
@@ -71,6 +89,25 @@ public class ChangePriceController implements Initializable{
             updatePane.setVisible(false);
             System.out.println("updated");
         }
+    }
+
+    private void populateTableView(){
+        try{
+            rs = ConnectionClass.connection.createStatement().executeQuery("SELECT * FROM material");
+            while(rs.next()){
+                materialList.add(new Material(rs.getInt("Product_ID"),rs.getString("Material_Name"),
+                        rs.getDouble("Unit_Price")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        obList.addAll(materialList);
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+
+        matTableView.setItems(obList);
     }
 
     private void optionsPage(){
@@ -89,4 +126,6 @@ public class ChangePriceController implements Initializable{
             e.printStackTrace();
         }
     }
+
+
 }
