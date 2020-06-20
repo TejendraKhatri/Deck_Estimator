@@ -1,6 +1,7 @@
 package com.pack.main;
 
 import com.pack.connectivity.ConnectionClass;
+import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Material;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,7 +36,7 @@ public class ChangePriceController implements Initializable{
     @FXML
     TextField newAmtField;
     @FXML
-    TableView matTableView;
+    TableView<Material> matTableView;
     @FXML
     TableColumn nameCol;
     @FXML
@@ -51,6 +52,7 @@ public class ChangePriceController implements Initializable{
     ObservableList<Material> obList = FXCollections.observableArrayList();
     ResultSet rs;
     PreparedStatement st;
+    Material x;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,7 +73,14 @@ public class ChangePriceController implements Initializable{
             }
         });
 
-//        matTableView.add
+        matTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                editBtn.setDisable(false);
+                x = matTableView.getSelectionModel().getSelectedItem();
+                matNameLabel.setText(x.getName());
+            }
+            else editBtn.setDisable(true);
+        });
 
         populateTableView();
     }
@@ -83,11 +92,16 @@ public class ChangePriceController implements Initializable{
         }
         else if(e.getSource() == editBtn){
             updatePane.setVisible(true);
-            matNameLabel.setText( " Aile lai temporary naam");
         }
         else if(e.getSource() == updateBtn){
             updatePane.setVisible(false);
-            System.out.println("updated");
+            UsefulFunctions.updateMaterialPrice(x.getId(),Double.valueOf(newAmtField.getText()));
+            materialList.clear();
+            obList.clear();
+            matTableView.getItems().clear();
+            newAmtField.clear();
+            populateTableView();
+            editBtn.setDisable(true);
         }
     }
 

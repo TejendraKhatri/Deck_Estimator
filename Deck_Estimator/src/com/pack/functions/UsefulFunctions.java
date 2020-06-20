@@ -131,6 +131,17 @@ public class UsefulFunctions{
             e.printStackTrace();
         }
     }
+
+    public static void updateMaterialPrice(int id, double price){
+        try{
+            st = ConnectionClass.connection.prepareStatement("UPDATE material SET Unit_Price = ? WHERE Product_ID =?");
+            st.setInt(2, id);
+            st.setDouble(1,price);
+            st.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
 
 
