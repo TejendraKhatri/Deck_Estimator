@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static com.pack.main.DeckDetailsController.newStairs;
+
 public class UsefulFunctions{
     public static ArrayList<Product> materialList = new ArrayList<>();
     static PreparedStatement st;
@@ -34,6 +36,15 @@ public class UsefulFunctions{
         calculateConcrete(lth,bdth);
         calculateBalusterBeveled(lth,bdth);
         calculateScrews(lth,bdth);
+        if(newStairs != null){
+            calculateStairMaterials(height);
+        }
+    }
+
+    private static void calculateStairMaterials(int height) {
+        addToMaterialOrderList(MaterialCode.Stair_Stringer,3);
+        addToMaterialOrderList(MaterialCode.Wood_2x12x8,1);
+        addToMaterialOrderList(MaterialCode.Wood_2x12x10,2);
     }
 
     private static void calculateScrews(double lth, double bdth) {
@@ -46,6 +57,10 @@ public class UsefulFunctions{
 
     private static void calculateBalusterBeveled(double lth, double bdth) {
         int qtyBaluster = (int) ((12 * lth + 24 * bdth - 6) / 5.5);
+        if(newStairs != null){
+            int num = (int) (2 / 5.5 * (120 * 9/ 7.5 - 2));
+            qtyBaluster += num;
+        }
         addToMaterialOrderList(MaterialCode.BalusterBeveled,qtyBaluster);
     }
 
