@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;
 import static com.pack.main.DeckDetailsController.newDeck;
+import static com.pack.main.DeckDetailsController.newStairs;
 
 public class ResultPageController {
     @FXML
@@ -109,6 +110,8 @@ public class ResultPageController {
     @FXML
     private void handleBtnAction(ActionEvent event){
         if(event.getSource() == backBtn){
+            newStairs = null;
+            newDeck = null;
             try {
                 Stage stage;
                 Parent root;

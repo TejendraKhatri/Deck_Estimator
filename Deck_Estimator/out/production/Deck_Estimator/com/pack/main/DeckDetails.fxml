@@ -14,7 +14,7 @@
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="86.0" prefWidth="578.0" text="Enter the deck details : " textAlignment="CENTER">
          <font>
-            <Font size="45.0" />
+            <Font size="40.0" />
          </font>
          <opaqueInsets>
             <Insets />
@@ -23,7 +23,7 @@
             <Insets left="5.0" />
          </VBox.margin>
          <padding>
-            <Insets top="10.0" />
+            <Insets top="3.0" />
          </padding>
       </Label>
       <HBox prefHeight="53.0" prefWidth="583.0">
