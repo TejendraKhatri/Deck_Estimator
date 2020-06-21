@@ -4,7 +4,6 @@ import com.pack.connectivity.ConnectionClass;
 import com.pack.functions.Constants;
 import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Product;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -62,11 +61,7 @@ public class ResultPageController {
     @FXML
     TextField surchargeField;
     @FXML
-    Button newQuoteBtn;
-    @FXML
-    MenuItem newQuoteMenu;
-    @FXML
-    MenuItem openQuoteMenu;
+    MenuItem redoMenu;
     @FXML
     MenuItem saveMenu;
     @FXML
@@ -75,8 +70,8 @@ public class ResultPageController {
     MenuItem aboutMenu;
 
     public static ResultSet rs;
-    private static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
-    DecimalFormat df = new DecimalFormat("#.##");
+    static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
+    private DecimalFormat df = new DecimalFormat("#.##");
 
     public void initialize(){
 
@@ -120,32 +115,50 @@ public class ResultPageController {
 
     @FXML
     private void handleBtnAction(ActionEvent event){
-        if(event.getSource() == newQuoteBtn){
-            newStairs = null;
-            newDeck = null;
-            try {
-                Stage stage;
-                Parent root;
-                stage = (Stage) newQuoteBtn.getScene().getWindow();
-                FXMLLoader myLoader =
-                        new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
-                root = myLoader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Customer Details");
-                stage.show();
-                UsefulFunctions.materialList.clear();
-                obsMaterialsList.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        if(event.getSource() == newQuoteBtn){
+//            newStairs = null;
+//            newDeck = null;
+//            try {
+//                Stage stage;
+//                Parent root;
+//                stage = (Stage) newQuoteBtn.getScene().getWindow();
+//                FXMLLoader myLoader =
+//                        new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
+//                root = myLoader.load();
+//                Scene scene = new Scene(root);
+//                stage.setScene(scene);
+//                stage.setTitle("Customer Details");
+//                stage.show();
+//                UsefulFunctions.materialList.clear();
+//                obsMaterialsList.clear();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @FXML
     private void handleMenuAction(ActionEvent event){
         if(event.getSource() == exitMenu){
-            Platform.exit();
+            Stage stage = (Stage) subTotalLabel.getScene().getWindow();
+            stage.close();
+        }
+        else if(event.getSource() == aboutMenu){
+            try {
+                Stage stage = new Stage();
+                Parent root;
+               // stage = (Stage) newQuoteBtn.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("AboutPage.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("About Deck Estimator");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -209,7 +222,5 @@ public class ResultPageController {
         });
         matTable.setItems(obsMaterialsList);
     }
-
-
 
 }

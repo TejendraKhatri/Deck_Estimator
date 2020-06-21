@@ -1,5 +1,6 @@
 package com.pack.main;
 
+import com.pack.functions.UsefulFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static com.pack.main.DeckDetailsController.newDeck;
+import static com.pack.main.DeckDetailsController.newStairs;
+import static com.pack.main.ResultPageController.obsMaterialsList;
 
 public class MenuOptionsController {
     @FXML
@@ -32,6 +37,10 @@ public class MenuOptionsController {
     @FXML
     private void newQuoteBtnAction(ActionEvent event){
         if(event.getSource() == newQuoteBtn){
+            newDeck = null;
+            newStairs = null;
+            UsefulFunctions.materialList.clear();
+            obsMaterialsList.clear();
             try {
                 Stage stage = new Stage();
                 Parent root;

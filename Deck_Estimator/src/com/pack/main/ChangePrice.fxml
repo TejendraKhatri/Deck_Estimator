@@ -18,7 +18,7 @@
             <TableColumn fx:id="idCol" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
         </columns>
       </TableView>
-      <Label layoutX="225.0" layoutY="7.0" text="Change Price">
+      <Label layoutX="174.0" layoutY="14.0" text="Change Material Price">
          <font>
             <Font size="26.0" />
          </font>
