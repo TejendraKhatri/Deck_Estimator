@@ -5,9 +5,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Material {
-    private SimpleIntegerProperty id;
-    private SimpleStringProperty name;
-    private SimpleDoubleProperty unitPrice;
+    private final SimpleIntegerProperty id;
+    private final SimpleStringProperty name;
+    private final SimpleDoubleProperty unitPrice;
 
     public Material(int id, String name, double unitPrice) {
         this.id = new SimpleIntegerProperty(id);

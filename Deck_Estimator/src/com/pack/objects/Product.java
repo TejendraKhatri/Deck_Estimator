@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Product {
-    private SimpleStringProperty name;
-    private SimpleIntegerProperty qty;
-    private SimpleDoubleProperty unitPrice;
-    private SimpleDoubleProperty subTotal;
+    private final SimpleStringProperty name;
+    private final SimpleIntegerProperty qty;
+    private final SimpleDoubleProperty unitPrice;
+    private final SimpleDoubleProperty subTotal;
 
     public Product(String name, int qty, double unitPrice) {
         this.name = new SimpleStringProperty(name);

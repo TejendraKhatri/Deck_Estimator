@@ -40,4 +40,9 @@ public class Customer implements Person {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return name + '\n' + phoneNumber + '\n' + address ;
+    }
 }

@@ -17,10 +17,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;
@@ -71,17 +76,14 @@ public class ResultPageController {
 
     public static ResultSet rs;
     static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
-    private DecimalFormat df = new DecimalFormat("#.##");
+    private final DecimalFormat df = new DecimalFormat("#.##");
 
     public void initialize(){
 
         discountField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("")){
-                    surchargeField.setDisable(false);
-                }
-                else surchargeField.setDisable(true);
+                surchargeField.setDisable(!newValue.equals(""));
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
                     discountField.setText(oldValue);
                 }
@@ -92,10 +94,7 @@ public class ResultPageController {
         surchargeField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("")){
-                    discountField.setDisable(false);
-                }
-                else discountField.setDisable(true);
+                discountField.setDisable(!newValue.equals(""));
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
                     surchargeField.setText(oldValue);
                 }
@@ -114,40 +113,38 @@ public class ResultPageController {
     }
 
     @FXML
-    private void handleBtnAction(ActionEvent event){
-//        if(event.getSource() == newQuoteBtn){
-//            newStairs = null;
-//            newDeck = null;
-//            try {
-//                Stage stage;
-//                Parent root;
-//                stage = (Stage) newQuoteBtn.getScene().getWindow();
-//                FXMLLoader myLoader =
-//                        new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
-//                root = myLoader.load();
-//                Scene scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.setTitle("Customer Details");
-//                stage.show();
-//                UsefulFunctions.materialList.clear();
-//                obsMaterialsList.clear();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-    }
-
-    @FXML
     private void handleMenuAction(ActionEvent event){
-        if(event.getSource() == exitMenu){
+        if(event.getSource() == redoMenu){
+            newDeck = null;
+            newStairs = null;
+            UsefulFunctions.materialList.clear();
+            obsMaterialsList.clear();
+            try {
+                Stage stage;
+                Parent root;
+                stage = (Stage) matTable.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("DeckDetails.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Deck Details");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(event.getSource() == exitMenu){
             Stage stage = (Stage) subTotalLabel.getScene().getWindow();
             stage.close();
+        }
+        else if(event.getSource() == saveMenu){
+            saveEstimate();
         }
         else if(event.getSource() == aboutMenu){
             try {
                 Stage stage = new Stage();
                 Parent root;
-               // stage = (Stage) newQuoteBtn.getScene().getWindow();
                 FXMLLoader myLoader =
                         new FXMLLoader(getClass().getResource("AboutPage.fxml"));
                 root = myLoader.load();
@@ -157,6 +154,29 @@ public class ResultPageController {
                 stage.setTitle("About Deck Estimator");
                 stage.show();
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveEstimate(){
+        JFrame parentFrame = new JFrame();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(parentFrame);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                FileWriter myWriter = new FileWriter(fileToSave);
+                myWriter.write(newCustomer.toString() + "\n");
+                myWriter.write(newDeck.toString() + "\n");
+                if(newStairs != null) {
+                    myWriter.write(newStairs.toString());
+                }else myWriter.write("END");
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
                 e.printStackTrace();
             }
         }

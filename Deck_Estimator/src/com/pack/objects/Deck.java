@@ -37,10 +37,6 @@ public class Deck {
 
     @Override
     public String toString() {
-        return "Deck{" +
-                "length=" + length +
-                ", breadth=" + breadth +
-                ", height=" + height +
-                '}';
+        return length + "\n" + breadth + "\n" + height ;
     }
 }

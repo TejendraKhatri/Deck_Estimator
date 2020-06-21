@@ -66,10 +66,7 @@ public class ChangePriceController implements Initializable{
                 if (!t1.matches("\\d{0,4}([\\.]\\d{0,2})?")) {
                     newAmtField.setText(s);
                 }
-                if(t1.isEmpty()){
-                    updateBtn.setDisable(true);
-                }
-                else updateBtn.setDisable(false);
+                updateBtn.setDisable(t1.isEmpty());
             }
         });
 

@@ -29,10 +29,7 @@ public class UserDetailsController {
         userName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!(userPhone.getText().equals("") || userName.getText().equals("")) ){
-                    btnContinue.setDisable(false);
-                }
-                else btnContinue.setDisable(true);
+                btnContinue.setDisable(userPhone.getText().equals("") || userName.getText().equals(""));
             }
         });
         userPhone.textProperty().addListener(new ChangeListener<String>() {
@@ -41,10 +38,7 @@ public class UserDetailsController {
                 if (!newValue.matches("\\d{0,10}?")) {
                     userPhone.setText(oldValue);
                 }
-                if (!(userPhone.getText().equals("") || userName.getText().equals(""))){
-                    btnContinue.setDisable(false);
-                }
-                else btnContinue.setDisable(true);
+                btnContinue.setDisable(userPhone.getText().equals("") || userName.getText().equals(""));
             }
         });
     }

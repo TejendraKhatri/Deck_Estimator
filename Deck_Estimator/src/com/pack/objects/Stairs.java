@@ -27,7 +27,6 @@ public class Stairs {
 
     @Override
     public String toString() {
-        return "totalRise=" + totalRise +
-                ", totalRun=" + totalRun;
+        return totalRun+"";
     }
 }

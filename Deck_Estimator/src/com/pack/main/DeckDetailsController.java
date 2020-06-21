@@ -110,14 +110,8 @@ public class DeckDetailsController {
         stairsChk.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(stairsChk.isSelected()){
-                    totalRunTextBox.setDisable(false);
-                }
-                else totalRunTextBox.setDisable(true);
-                if(stairsChk.isSelected() && !totalRunTextBox.getText().isEmpty()){
-                    nextBtn.setDisable(false);
-                }
-                else nextBtn.setDisable(true);
+                totalRunTextBox.setDisable(!stairsChk.isSelected());
+                nextBtn.setDisable(!stairsChk.isSelected() || totalRunTextBox.getText().isEmpty());
             }
         });
 
@@ -127,10 +121,7 @@ public class DeckDetailsController {
                 if (!t1.matches("\\d{0,10}?")) {
                     totalRunTextBox.setText(s);
                 }
-                if(totalRunTextBox.getText().isEmpty()){
-                    nextBtn.setDisable(true);
-                }
-                else nextBtn.setDisable(false);
+                nextBtn.setDisable(totalRunTextBox.getText().isEmpty());
             }
         });
 

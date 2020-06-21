@@ -35,21 +35,15 @@ public class CustomerDetailsController {
         customerName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!(customerPhone.getText().equals("") || customerName.getText().equals("")
-                      || customerAddress.getText().equals("")) ){
-                    btnContinue.setDisable(false);
-                }
-                else btnContinue.setDisable(true);
+                btnContinue.setDisable(customerPhone.getText().equals("") || customerName.getText().equals("")
+                        || customerAddress.getText().equals(""));
             }
         });
         customerAddress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!(customerPhone.getText().equals("") || customerName.getText().equals("")
-                        || customerAddress.getText().equals("")) ){
-                    btnContinue.setDisable(false);
-                }
-                else btnContinue.setDisable(true);
+                btnContinue.setDisable(customerPhone.getText().equals("") || customerName.getText().equals("")
+                        || customerAddress.getText().equals(""));
             }
         });
         customerPhone.textProperty().addListener(new ChangeListener<String>() {
@@ -58,11 +52,8 @@ public class CustomerDetailsController {
                 if (!newValue.matches("\\d{0,10}?")) {
                     customerPhone.setText(oldValue);
                 }
-                if (!(customerPhone.getText().equals("") || customerName.getText().equals("")
-                        || customerAddress.getText().equals(""))){
-                    btnContinue.setDisable(false);
-                }
-                else btnContinue.setDisable(true);
+                btnContinue.setDisable(customerPhone.getText().equals("") || customerName.getText().equals("")
+                        || customerAddress.getText().equals(""));
             }
         });
     }
@@ -88,20 +79,9 @@ public class CustomerDetailsController {
             }
         }
         if(event.getSource() == backBtn){
-           try {
-                Stage stage;
-                Parent root;
-                stage = (Stage) btnContinue.getScene().getWindow();
-                FXMLLoader myLoader =
-                        new FXMLLoader(getClass().getResource("MenuOptions.fxml"));
-                root = myLoader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Menu Options");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Stage stage;
+            stage = (Stage) btnContinue.getScene().getWindow();
+            stage.close();
         }
     }
 }
