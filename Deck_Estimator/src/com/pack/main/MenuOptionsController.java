@@ -1,6 +1,7 @@
 package com.pack.main;
 
 import com.pack.functions.UsefulFunctions;
+import com.pack.objects.Stairs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,10 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static com.pack.main.DeckDetailsController.newDeck;
 import static com.pack.main.DeckDetailsController.newStairs;
@@ -61,7 +65,36 @@ public class MenuOptionsController {
 
     @FXML
     private void openQuoteBtnAction(ActionEvent event){
-
+        JFrame parentFrame = new JFrame();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a quote to open");
+        int userSelection = fileChooser.showOpenDialog(parentFrame);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToRead = fileChooser.getSelectedFile();
+            try {
+                Scanner reader = new Scanner(fileToRead);
+                    String custName = reader.nextLine();
+                    String custPhn = reader.nextLine();
+                    String custAdd = reader.nextLine();
+                    Double len = reader.nextDouble();
+                    Double width = reader.nextDouble();
+                    Integer hght = reader.nextInt();
+                    String dump = reader.nextLine();
+                    String temp = reader.nextLine();
+                    if(temp.equals("END")){
+                        newStairs = null;
+                        System.out.println("No STAIRS");
+                    }
+                    else{
+                        newStairs = new Stairs(hght,Float.valueOf(temp));
+                    }
+            } catch (IOException e) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Incorrect file format");
+                a.showAndWait();
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -99,8 +132,5 @@ public class MenuOptionsController {
             }
         }
     }
-
-
-
 
 }
