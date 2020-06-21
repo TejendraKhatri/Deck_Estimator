@@ -212,7 +212,8 @@ public class ResultPageController {
         custAddress.setText(newCustomer.getAddress());
 
         //FORMAT TO TWO DECIMAL PLACES
-        deckDetails.setText(df.format(newDeck.getLength()) + " ft. x " + df.format(newDeck.getBreadth()) + " ft.");
+        deckDetails.setText(df.format((newDeck.getLength() + (float)newDeck.getLnthInch()/12))
+                + " ft. x " + df.format((newDeck.getBreadth() + (float)newDeck.getBreadthInch()/12)) + " ft.");
         try {
             rs = ConnectionClass.connection.createStatement().executeQuery("SELECT * FROM user");
             rs.next();

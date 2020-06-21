@@ -1,6 +1,8 @@
 package com.pack.main;
 
 import com.pack.functions.UsefulFunctions;
+import com.pack.objects.Customer;
+import com.pack.objects.Deck;
 import com.pack.objects.Stairs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.pack.main.DeckDetailsController.newDeck;
@@ -73,22 +76,47 @@ public class MenuOptionsController {
             File fileToRead = fileChooser.getSelectedFile();
             try {
                 Scanner reader = new Scanner(fileToRead);
-                    String custName = reader.nextLine();
-                    String custPhn = reader.nextLine();
-                    String custAdd = reader.nextLine();
-                    Double len = reader.nextDouble();
-                    Double width = reader.nextDouble();
-                    Integer hght = reader.nextInt();
-                    String dump = reader.nextLine();
-                    String temp = reader.nextLine();
-                    if(temp.equals("END")){
-                        newStairs = null;
-                        System.out.println("No STAIRS");
-                    }
-                    else{
-                        newStairs = new Stairs(hght,Float.valueOf(temp));
-                    }
-            } catch (IOException e) {
+                String custName = reader.nextLine();
+                String custPhn = reader.nextLine();
+                String custAdd = reader.nextLine();
+                int len = reader.nextInt();
+                int width = reader.nextInt();
+                int lenIn = reader.nextInt();
+                int widIn = reader.nextInt();
+                int hght = reader.nextInt();
+                String dump = reader.nextLine();
+                String temp = reader.nextLine();
+                //System.out.println(custName + " " + custPhn+ " "+custAdd+ " "+len+ " "+width+ " "+lenIn+ " "+widIn+ " "+hght+ " "+temp+ "!!!!");
+                CustomerDetailsController.newCustomer = new Customer(custName,custPhn,custAdd);
+                newDeck = new Deck(len,lenIn,width,widIn,hght);
+                if(temp.equals("END")){
+                    newStairs = null;
+                    System.out.println("No STAIRS");
+                }
+                else{
+                    newStairs = new Stairs(hght,Float.valueOf(temp));
+                }
+
+                //CHANGING PAGE NOW
+                UsefulFunctions.materialList.clear();
+                obsMaterialsList.clear();
+                Stage stage = new Stage();
+                Parent root;
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("ResultPage.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Estimate Details");
+                stage.show();
+
+            }
+            catch(InputMismatchException e){
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Incorrect file format");
+                a.showAndWait();
+            }
+            catch (IOException e) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setContentText("Incorrect file format");
                 a.showAndWait();

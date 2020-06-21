@@ -3,6 +3,7 @@ package com.pack.main;
 import com.pack.connectivity.ConnectionClass;
 import com.pack.functions.UsefulFunctions;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,5 +37,6 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception {
         launch(args);
         ConnectionClass.closeConnection();
+        Platform.exit();
     }
 }

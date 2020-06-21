@@ -1,21 +1,41 @@
 package com.pack.objects;
 
 public class Deck {
-    private float length;
-    private float breadth;
+    private int length;
+    private int breadth;
     private int height;
+    private int lnthInch;
+    private int breadthInch;
 
-    public Deck(int length, int lengthIN, int breadth, int breadthIn, int height) {
-        this.length = length + (float)lengthIN/12;
-        this.breadth = breadth + (float)breadthIn/12;
-        this.height = height;
+    public int getLnthInch() {
+        return lnthInch;
     }
 
-    public float getLength() {
+    public void setLnthInch(int lnthInch) {
+        this.lnthInch = lnthInch;
+    }
+
+    public int getBreadthInch() {
+        return breadthInch;
+    }
+
+    public void setBreadthInch(int breadthInch) {
+        this.breadthInch = breadthInch;
+    }
+
+    public Deck(int length, int lengthIN, int breadth, int breadthIn, int height) {
+        this.length = length;
+        this.breadth = breadth;
+        this.height = height;
+        this.lnthInch = lengthIN;
+        this.breadthInch = breadthIn;
+    }
+
+    public int getLength() {
         return length;
     }
 
-    public void setLength(float length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
@@ -23,7 +43,7 @@ public class Deck {
         return breadth;
     }
 
-    public void setBreadth(float breadth) {
+    public void setBreadth(int breadth) {
         this.breadth = breadth;
     }
 
@@ -37,6 +57,6 @@ public class Deck {
 
     @Override
     public String toString() {
-        return length + "\n" + breadth + "\n" + height ;
+        return length + "\n" + lnthInch + "\n" + breadth + "\n" +breadthInch + "\n" + height ;
     }
 }
