@@ -63,7 +63,21 @@ public class MenuOptionsController {
 
     @FXML
     private void updateQuoteBtnAction(ActionEvent event){
-
+        if(!getDataFromTxt()) return;
+        try{
+            Stage stage = new Stage();
+            Parent root;
+            FXMLLoader myLoader =
+                    new FXMLLoader(getClass().getResource("UpdateQuote.fxml"));
+            root = myLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Update Quote");
+            stage.show();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -142,6 +156,7 @@ public class MenuOptionsController {
                 int hght = reader.nextInt();
                 String dump = reader.nextLine();
                 String temp = reader.nextLine();
+                reader.close();
                 CustomerDetailsController.newCustomer = new Customer(custName, custPhn, custAdd);
                 newDeck = new Deck(len, lenIn, width, widIn, hght);
                 if (temp.equals("END")) {
@@ -161,6 +176,6 @@ public class MenuOptionsController {
                 e.printStackTrace();
             }
         }
-        return  false;
+        return false;
     }
 }

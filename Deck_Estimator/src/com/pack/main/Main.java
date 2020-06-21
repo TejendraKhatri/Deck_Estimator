@@ -38,5 +38,6 @@ public class Main extends Application {
         launch(args);
         ConnectionClass.closeConnection();
         Platform.exit();
+        System.exit(0);
     }
 }
