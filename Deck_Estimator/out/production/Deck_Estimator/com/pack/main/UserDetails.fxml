@@ -5,39 +5,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="229.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.main.UserDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.main.UserDetailsController">
    <children>
-      <TextField fx:id="userName" layoutX="111.0" layoutY="61.0" promptText="Enter user name">
+      <TextField fx:id="userName" layoutX="128.0" layoutY="56.0" promptText="Enter user name" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="89.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="userPhone" layoutX="111.0" layoutY="107.0" promptText="Enter Phone Number">
+      <TextField fx:id="userPhone" layoutX="128.0" layoutY="106.0" promptText="Enter Phone Number" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="89.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="111.0" layoutY="8.0" text="User Details" textAlignment="CENTER" textFill="#0ad71f">
+      <Label layoutX="135.0" layoutY="5.0" prefHeight="38.0" prefWidth="146.0" text="User Details" textAlignment="CENTER" textFill="#0ad71f" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="123.0">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="btnContinue" defaultButton="true" layoutX="59.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnClickedAction" prefHeight="31.0" prefWidth="251.0" text="Continue">
+      <Button fx:id="btnContinue" defaultButton="true" layoutX="127.0" layoutY="156.0" mnemonicParsing="false" onAction="#btnClickedAction" prefHeight="38.0" prefWidth="200.0" text="Continue" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="90.0">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="51.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="76.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="299.6938781738281" AnchorPane.topAnchor="56.0">
          <image>
             <Image url="@../images/user.png" />
-         </image></ImageView>
-      <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="51.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="76.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="298.0" AnchorPane.topAnchor="103.0">
          <image>
             <Image url="@../images/phone.jpg" />
          </image>
       </ImageView>
    </children>
-</Pane>
+</AnchorPane>

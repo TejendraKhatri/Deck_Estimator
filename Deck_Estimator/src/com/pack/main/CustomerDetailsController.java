@@ -24,6 +24,8 @@ public class CustomerDetailsController {
     Button btnContinue;
     @FXML
     TextField customerAddress;
+    @FXML
+    Button backBtn;
 
     public static Customer newCustomer;
 
@@ -80,6 +82,22 @@ public class CustomerDetailsController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Deck Details");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(event.getSource() == backBtn){
+           try {
+                Stage stage;
+                Parent root;
+                stage = (Stage) btnContinue.getScene().getWindow();
+                FXMLLoader myLoader =
+                        new FXMLLoader(getClass().getResource("MenuOptions.fxml"));
+                root = myLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Menu Options");
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
