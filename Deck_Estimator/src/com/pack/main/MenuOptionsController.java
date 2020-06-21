@@ -33,9 +33,9 @@ public class MenuOptionsController {
     private void newQuoteBtnAction(ActionEvent event){
         if(event.getSource() == newQuoteBtn){
             try {
-                Stage stage;
+                Stage stage = new Stage();
                 Parent root;
-                stage = (Stage) newQuoteBtn.getScene().getWindow();
+              //  stage = (Stage) newQuoteBtn.getScene().getWindow();
                 FXMLLoader myLoader =
                         new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
                 root = myLoader.load();

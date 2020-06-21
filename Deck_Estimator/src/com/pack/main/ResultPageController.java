@@ -4,6 +4,7 @@ import com.pack.connectivity.ConnectionClass;
 import com.pack.functions.Constants;
 import com.pack.functions.UsefulFunctions;
 import com.pack.objects.Product;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,7 +62,17 @@ public class ResultPageController {
     @FXML
     TextField surchargeField;
     @FXML
-    Button backBtn;
+    Button newQuoteBtn;
+    @FXML
+    MenuItem newQuoteMenu;
+    @FXML
+    MenuItem openQuoteMenu;
+    @FXML
+    MenuItem saveMenu;
+    @FXML
+    MenuItem exitMenu;
+    @FXML
+    MenuItem aboutMenu;
 
     public static ResultSet rs;
     private static ObservableList<Product> obsMaterialsList = FXCollections.observableArrayList();
@@ -109,13 +120,13 @@ public class ResultPageController {
 
     @FXML
     private void handleBtnAction(ActionEvent event){
-        if(event.getSource() == backBtn){
+        if(event.getSource() == newQuoteBtn){
             newStairs = null;
             newDeck = null;
             try {
                 Stage stage;
                 Parent root;
-                stage = (Stage) backBtn.getScene().getWindow();
+                stage = (Stage) newQuoteBtn.getScene().getWindow();
                 FXMLLoader myLoader =
                         new FXMLLoader(getClass().getResource("CustomerDetails.fxml"));
                 root = myLoader.load();
@@ -128,6 +139,13 @@ public class ResultPageController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    private void handleMenuAction(ActionEvent event){
+        if(event.getSource() == exitMenu){
+            Platform.exit();
         }
     }
 
