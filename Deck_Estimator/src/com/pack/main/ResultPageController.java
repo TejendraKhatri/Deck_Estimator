@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;

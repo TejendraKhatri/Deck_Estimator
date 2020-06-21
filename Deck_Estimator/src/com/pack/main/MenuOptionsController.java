@@ -68,36 +68,8 @@ public class MenuOptionsController {
 
     @FXML
     private void openQuoteBtnAction(ActionEvent event){
-        JFrame parentFrame = new JFrame();
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Specify a quote to open");
-        int userSelection = fileChooser.showOpenDialog(parentFrame);
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File fileToRead = fileChooser.getSelectedFile();
-            try {
-                Scanner reader = new Scanner(fileToRead);
-                String custName = reader.nextLine();
-                String custPhn = reader.nextLine();
-                String custAdd = reader.nextLine();
-                int len = reader.nextInt();
-                int width = reader.nextInt();
-                int lenIn = reader.nextInt();
-                int widIn = reader.nextInt();
-                int hght = reader.nextInt();
-                String dump = reader.nextLine();
-                String temp = reader.nextLine();
-                //System.out.println(custName + " " + custPhn+ " "+custAdd+ " "+len+ " "+width+ " "+lenIn+ " "+widIn+ " "+hght+ " "+temp+ "!!!!");
-                CustomerDetailsController.newCustomer = new Customer(custName,custPhn,custAdd);
-                newDeck = new Deck(len,lenIn,width,widIn,hght);
-                if(temp.equals("END")){
-                    newStairs = null;
-                    System.out.println("No STAIRS");
-                }
-                else{
-                    newStairs = new Stairs(hght,Float.valueOf(temp));
-                }
-
-                //CHANGING PAGE NOW
+            if(!getDataFromTxt()) return;
+            try{
                 UsefulFunctions.materialList.clear();
                 obsMaterialsList.clear();
                 Stage stage = new Stage();
@@ -109,21 +81,11 @@ public class MenuOptionsController {
                 stage.setScene(scene);
                 stage.setTitle("Estimate Details");
                 stage.show();
-
             }
-            catch(InputMismatchException e){
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("Incorrect file format");
-                a.showAndWait();
-            }
-            catch (IOException e) {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("Incorrect file format");
-                a.showAndWait();
+            catch(IOException e){
                 e.printStackTrace();
             }
         }
-    }
 
     @FXML
     private void deleteQuoteBtnAction(ActionEvent event){
@@ -161,4 +123,44 @@ public class MenuOptionsController {
         }
     }
 
+    private boolean getDataFromTxt() {
+        JFrame parentFrame = new JFrame();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a quote to open");
+        int userSelection = fileChooser.showOpenDialog(parentFrame);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToRead = fileChooser.getSelectedFile();
+            try {
+                Scanner reader = new Scanner(fileToRead);
+                String custName = reader.nextLine();
+                String custPhn = reader.nextLine();
+                String custAdd = reader.nextLine();
+                int len = reader.nextInt();
+                int width = reader.nextInt();
+                int lenIn = reader.nextInt();
+                int widIn = reader.nextInt();
+                int hght = reader.nextInt();
+                String dump = reader.nextLine();
+                String temp = reader.nextLine();
+                CustomerDetailsController.newCustomer = new Customer(custName, custPhn, custAdd);
+                newDeck = new Deck(len, lenIn, width, widIn, hght);
+                if (temp.equals("END")) {
+                    newStairs = null;
+                } else {
+                    newStairs = new Stairs(hght, Float.valueOf(temp));
+                }
+                return true;
+            } catch (InputMismatchException e) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Incorrect file format");
+                a.showAndWait();
+            } catch (IOException e) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Incorrect file format");
+                a.showAndWait();
+                e.printStackTrace();
+            }
+        }
+        return  false;
+    }
 }
