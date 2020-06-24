@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.main.CustomerDetailsController">
+   <children>
+      <TextField fx:id="customerName" layoutX="116.0" layoutY="58.0" promptText="Enter name" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="customerPhone" layoutX="116.0" layoutY="105.0" promptText="Only digits allowed" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="customerAddress" layoutX="116.0" layoutY="151.0" promptText="Enter address" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="84.0" layoutY="6.0" text="Customer Details" textAlignment="CENTER" textFill="#0ad71f">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnContinue" defaultButton="true" layoutX="221.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnClickedAction" prefHeight="31.0" prefWidth="95.0" text="Continue" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="69.8">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="38.0" fitWidth="50.0" layoutX="53.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/blueuser.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="57.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/greenPhn.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="57.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/address.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="116.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnClickedAction" prefHeight="31.0" prefWidth="103.0" text="Cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.main.SplashController">
+    <children>
+        <ImageView fitHeight="572.0" fitWidth="984.0" pickOnBounds="true" smooth="false">
+            <image>
+                <Image url="@../images/rollingChair.gif" />
+            </image>
+        </ImageView>
+    </children>
+</StackPane>
