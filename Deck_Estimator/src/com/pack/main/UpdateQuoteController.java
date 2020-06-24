@@ -120,7 +120,7 @@ public class UpdateQuoteController {
         }
         else if(surcharge!= 0 ){
             surchargeField.setDisable(false);
-            surchargeField.setText(String.valueOf(discount));
+            surchargeField.setText(String.valueOf(surcharge));
         }
 
         stairsChk.selectedProperty().addListener(new ChangeListener<Boolean>() {
