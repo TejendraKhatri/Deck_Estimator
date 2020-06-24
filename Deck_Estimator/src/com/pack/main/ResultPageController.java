@@ -29,6 +29,8 @@ import static com.pack.functions.UsefulFunctions.populateObservableList;
 import static com.pack.main.CustomerDetailsController.newCustomer;
 import static com.pack.main.DeckDetailsController.newDeck;
 import static com.pack.main.DeckDetailsController.newStairs;
+import static com.pack.main.MenuOptionsController.discount;
+import static com.pack.main.MenuOptionsController.surcharge;
 
 public class ResultPageController {
     @FXML
@@ -77,6 +79,14 @@ public class ResultPageController {
     private final DecimalFormat df = new DecimalFormat("#.##");
 
     public void initialize(){
+        if(discount!= 0 ){
+            discountField.setDisable(false);
+            discountField.setText(String.valueOf(discount));
+        }
+        else if(surcharge!= 0 ){
+            surchargeField.setDisable(false);
+            surchargeField.setText(String.valueOf(surcharge));
+        }
 
         discountField.textProperty().addListener(new ChangeListener<String>() {
             @Override

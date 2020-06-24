@@ -138,6 +138,8 @@ public class MenuOptionsController {
     }
 
     private boolean getDataFromTxt() {
+        discount = 0;
+        surcharge = 0;
         JFrame parentFrame = new JFrame();
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Specify a quote to open");
