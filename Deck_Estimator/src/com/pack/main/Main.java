@@ -17,16 +17,10 @@ public class Main extends Application {
         //CREATE DATABASE CONNECTION
         ConnectionClass connectionClass = new ConnectionClass();
         ConnectionClass.connection = connectionClass.getConnection();
-        String startPage = "MenuOptions.fxml";
-        String stageTitle = "Menu Options";
+
+        String startPage = "sampleSplash.fxml";
+        String stageTitle = "Loading.........";
         Parent root;
-        if (UsefulFunctions.userExists()) {
-            System.out.println("User Exists");
-        } else {
-            System.out.println("User not exists");
-            startPage = "UserDetails.fxml";
-            stageTitle = "User Details";
-        }
         root = FXMLLoader.load(getClass().getResource(startPage));
         primaryStage.setTitle(stageTitle);
         primaryStage.setScene(new Scene(root));
