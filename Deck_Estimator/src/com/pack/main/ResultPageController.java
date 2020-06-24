@@ -114,6 +114,8 @@ public class ResultPageController {
     }
 
     private void updateWindow(){
+        discount = 0;
+        surcharge = 0;
         populateObservableList(newDeck.getLength(),newDeck.getBreadth(), newDeck.getHeight());
         populateTableView();
         populateOtherDetails();
