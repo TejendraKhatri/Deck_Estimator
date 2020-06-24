@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -27,6 +25,8 @@ import static com.pack.main.DeckDetailsController.newStairs;
 import static com.pack.main.ResultPageController.obsMaterialsList;
 
 public class MenuOptionsController {
+    public static float discount = 0;
+    public static float surcharge = 0;
     @FXML
     Button newQuoteBtn;
     @FXML
@@ -156,7 +156,6 @@ public class MenuOptionsController {
                 int hght = reader.nextInt();
                 String dump = reader.nextLine();
                 String temp = reader.nextLine();
-                reader.close();
                 CustomerDetailsController.newCustomer = new Customer(custName, custPhn, custAdd);
                 newDeck = new Deck(len, lenIn, width, widIn, hght);
                 if (temp.equals("END")) {
@@ -164,6 +163,19 @@ public class MenuOptionsController {
                 } else {
                     newStairs = new Stairs(hght, Float.valueOf(temp));
                 }
+                temp = reader.nextLine();
+                System.out.println(temp);
+                if(temp.equals("DISCOUNT"))
+                {
+                    discount = Float.valueOf(reader.nextFloat());
+                    System.out.println("Discount : " + discount);
+                }
+                else if(temp.equals("SURCHARGE"))
+                {
+                    surcharge = Float.valueOf(reader.nextFloat());
+                    System.out.println("Surcharge : " + surcharge);
+                }
+                reader.close();
                 return true;
             } catch (InputMismatchException e) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);

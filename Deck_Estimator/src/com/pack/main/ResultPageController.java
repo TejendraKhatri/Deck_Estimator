@@ -82,7 +82,7 @@ public class ResultPageController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 surchargeField.setDisable(!newValue.equals(""));
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
                     discountField.setText(oldValue);
                 }
                 updateTotalBalance();
@@ -93,23 +93,23 @@ public class ResultPageController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 discountField.setDisable(!newValue.equals(""));
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,10})?")) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
                     surchargeField.setText(oldValue);
                 }
                 updateTotalBalance();
             }
         });
 
-
-        populateObservableList(newDeck.getLength(),newDeck.getBreadth(), newDeck.getHeight());
-
-        populateTableView();
-
-        populateOtherDetails();
-
-        updateTotalBalance();
+        updateWindow();
     }
 
+    private void updateWindow(){
+        populateObservableList(newDeck.getLength(),newDeck.getBreadth(), newDeck.getHeight());
+        populateTableView();
+        populateOtherDetails();
+        updateTotalBalance();
+    }
+    
     @FXML
     private void handleMenuAction(ActionEvent event){
         if(event.getSource() == redoMenu){
@@ -157,7 +157,7 @@ public class ResultPageController {
         }
     }
 
-    private void saveEstimate(){
+    public void saveEstimate(){
         JFrame parentFrame = new JFrame();
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Specify a file to save");
@@ -169,8 +169,17 @@ public class ResultPageController {
                 myWriter.write(newCustomer.toString() + "\n");
                 myWriter.write(newDeck.toString() + "\n");
                 if(newStairs != null) {
-                    myWriter.write(newStairs.toString());
-                }else myWriter.write("END");
+                    myWriter.write(newStairs.toString() + "\n");
+                }else myWriter.write("END\n");
+                if (!(discountField.getText() == null || discountField.getText().trim().isEmpty())) {
+                    myWriter.write("DISCOUNT\n");
+                    myWriter.write(discountField.getText());
+                }
+                else if(!(surchargeField.getText() == null || surchargeField.getText().trim().isEmpty())){
+                    myWriter.write("SURCHARGE\n");
+                    myWriter.write(surchargeField.getText());
+                }
+                else myWriter.write("END");
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
             } catch (IOException e) {

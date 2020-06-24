@@ -58,8 +58,8 @@ public class UsefulFunctions{
     private static void calculateBalusterBeveled(double lth, double bdth) {
         int qtyBaluster = (int) ((12 * lth + 24 * bdth - 6) / 5.5);
         if(newStairs != null){
-            int num = (int) (2 / 5.5 * (120 * 9/ 7.5 - 2));
-            qtyBaluster += num;
+            int num = (int) (2 / 5.5 * (50 * 9/ 7.5 - 2));
+            qtyBaluster += (num + newStairs.getTotalRun()*2);
         }
         addToMaterialOrderList(MaterialCode.BalusterBeveled,qtyBaluster);
     }
@@ -103,7 +103,7 @@ public class UsefulFunctions{
     }
 
     private static void calculateFootings(double lth, double bdth,int height){
-        int numFootings = (int) (Math.sqrt(lth*bdth) - 1);
+        int numFootings = (int) ((Math.sqrt(lth*bdth) - 1) + height - 1);
         if(height > 8){
             addToMaterialOrderList(MaterialCode.Wood_4x4x10,numFootings);
             addToMaterialOrderList(MaterialCode.Wood_4x4x8,1);

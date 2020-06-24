@@ -39,7 +39,7 @@ public class Deck {
         this.length = length;
     }
 
-    public float getBreadth() {
+    public int getBreadth() {
         return breadth;
     }
 
