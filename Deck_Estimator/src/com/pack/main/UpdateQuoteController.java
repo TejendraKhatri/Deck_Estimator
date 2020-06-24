@@ -322,8 +322,8 @@ public class UpdateQuoteController {
         double taxAmt = subtotalAmt * Constants.TAXRATE / 100;
         taxAmtLabel.setText(df.format(taxAmt));
 
-        double discountAmt = 0;
-        double surchargeAmt = 0;
+        double discountAmt = discount;
+        double surchargeAmt = surcharge;
         if(!(discountField.getText().isEmpty())){
             discountAmt = Double.valueOf(discountField.getText());
         }

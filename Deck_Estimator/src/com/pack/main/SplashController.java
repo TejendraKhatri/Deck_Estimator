@@ -8,13 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
 public class SplashController {
     @FXML
     private StackPane rootPane;
-    static Stage stage = new Stage();
+    Stage stage = new Stage();
 
     public class SampleSplashScreen extends Thread {
         public void run(){

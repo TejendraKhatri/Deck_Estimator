@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
@@ -19,10 +20,9 @@ public class Main extends Application {
         ConnectionClass.connection = connectionClass.getConnection();
 
         String startPage = "sampleSplash.fxml";
-        String stageTitle = "Loading.........";
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         Parent root;
         root = FXMLLoader.load(getClass().getResource(startPage));
-        primaryStage.setTitle(stageTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
